@@ -29,5 +29,6 @@ class ParticipateInForum extends TestCase
     public function test_test($param) {
         $thread = factory('App\Thread')->create();
         $thread = factory('App\Thread')->create();
+        $thread = factory('App\Thread')->create();
     }
 }
