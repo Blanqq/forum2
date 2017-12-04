@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Code/Homestead/forum2/app/Http/Controllers/ThreadController.php</file>
+            <file>file:/C:/Code/Homestead/forum2/database/factories/UserFactory.php</file>
+            <file>file:/C:/Code/Homestead/forum2/phpunit.xml</file>
+            <file>file:/C:/Code/Homestead/forum2/config/broadcasting.php</file>
+            <file>file:/C:/Code/Homestead/forum2/app/Reply.php</file>
+            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/reply.blade.php</file>
+            <file>file:/C:/Code/Homestead/forum2/tests/Feature/ParticipateInForumTest.php</file>
+            <file>file:/C:/Code/Homestead/forum2/tests/Unit/ThreadTest.php</file>
+            <file>file:/C:/Code/Homestead/forum2/tests/Unit/ReplyTest.php</file>
+            <file>file:/C:/Code/Homestead/forum2/.env</file>
+            <file>file:/C:/Code/Homestead/forum2/routes/web.php</file>
+            <file>file:/C:/Code/Homestead/forum2/tests/Feature/ThreadsTest.php</file>
+            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/show.blade.php</file>
+            <file>file:/C:/Code/Homestead/forum2/app/Thread.php</file>
+            <file>file:/C:/Code/Homestead/forum2/config/database.php</file>
+            <file>file:/C:/Code/Homestead/forum2/app/Http/Controllers/ReplyController.php</file>
+            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/index.blade.php</file>
+        </group>
+    </open-files>
 </project-private>

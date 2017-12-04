@@ -33,5 +33,31 @@
            
         </div>
     </div>
+    @if(auth()->check())
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                    Hello World
+                    
+                    <form method="POST" action="/threads/{{$thread->id}}/replies">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <textarea name="body" id="body" class="form-control" placeholder="Type your answer here" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default pull-right">Post</button>
+                        </div>
+                    </form>
+
+            </div>
+        </div>
+    @else
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <p><a href="{{route('login')}}">Plesase Sign In</a></p>
+        </div>
+    </div>
+    
+    @endif
 </div>
 @endsection
