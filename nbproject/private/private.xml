@@ -5,21 +5,15 @@
         <group>
             <file>file:/C:/Code/Homestead/forum2/app/Http/Controllers/ThreadController.php</file>
             <file>file:/C:/Code/Homestead/forum2/database/factories/UserFactory.php</file>
-            <file>file:/C:/Code/Homestead/forum2/phpunit.xml</file>
-            <file>file:/C:/Code/Homestead/forum2/config/broadcasting.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Reply.php</file>
-            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/reply.blade.php</file>
-            <file>file:/C:/Code/Homestead/forum2/tests/Feature/ParticipateInForumTest.php</file>
-            <file>file:/C:/Code/Homestead/forum2/tests/Unit/ThreadTest.php</file>
-            <file>file:/C:/Code/Homestead/forum2/tests/Unit/ReplyTest.php</file>
-            <file>file:/C:/Code/Homestead/forum2/.env</file>
+            <file>file:/C:/Code/Homestead/forum2/tests/TestCase.php</file>
+            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/create.blade.php</file>
             <file>file:/C:/Code/Homestead/forum2/routes/web.php</file>
             <file>file:/C:/Code/Homestead/forum2/tests/Feature/ThreadsTest.php</file>
             <file>file:/C:/Code/Homestead/forum2/resources/views/threads/show.blade.php</file>
+            <file>file:/C:/Code/Homestead/forum2/resources/views/layouts/app.blade.php</file>
+            <file>file:/C:/Code/Homestead/forum2/tests/Feature/CreateThreadsTest.php</file>
             <file>file:/C:/Code/Homestead/forum2/app/Thread.php</file>
-            <file>file:/C:/Code/Homestead/forum2/config/database.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Http/Controllers/ReplyController.php</file>
-            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/index.blade.php</file>
+            <file>file:/C:/Code/Homestead/forum2/app/Exceptions/Handler.php</file>
         </group>
     </open-files>
 </project-private>
