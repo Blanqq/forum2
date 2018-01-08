@@ -41,12 +41,12 @@ class CreateThreadsTest extends TestCase
         //check if thread exists
     }
     
-    public function test_guest_cant_see_create_thread_page()
+    /*public function test_guest_cant_see_create_thread_page()
     {
-        $this->expectException('Illuminate\Auth\AuthenticationException');
-        $this->get('threads/create')->assertRedirect('/login');
-        //$this->withExceptionHandling()->get('/threads/create')->assertRedirect('/login');
-    }
+        $this->withExceptionHandling();   //exceptionHandling dont ned to fix "unauthenticated"
+        $this->get('/threads/create')->assertRedirect('/login');
+        $this->post('/threads')->assertRedirect('/login');
+    }*/
     /*function test_a_thread_requires_a_title(){
         $this->withExceptionHandling()->signIn();
         //$this->withExceptionHandling();
