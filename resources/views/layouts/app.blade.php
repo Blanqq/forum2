@@ -47,6 +47,9 @@
 
                             </ul>
                         </li>
+                        <li>
+                            <a href="/threads/create">Create New Thread</a>
+                        </li>
                         &nbsp;
                     </ul>
 
