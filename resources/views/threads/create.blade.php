@@ -23,7 +23,7 @@
                             <label for="body">Channel:</label>
                             <select name="channel_id" class="form-control" required>
                                 <option value="">Select Channel</option>
-                                @foreach (App\Channel::all() as $channel)
+                                @foreach ($channels as $channel)  //channels send through appserviceprovider
                                     <option value="{{$channel->id}}" {{old('channel_id') == $channel->id ? 'selected' : ''}}>{{$channel->slug}}</option>
                                 @endforeach
                             </select>
