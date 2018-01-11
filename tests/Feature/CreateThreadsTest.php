@@ -41,21 +41,26 @@ class CreateThreadsTest extends TestCase
         //check if thread exists
     }
     
-    /*public function test_guest_cant_see_create_thread_page()
+    public function test_guest_cant_see_create_thread_page()
     {
-        $this->withExceptionHandling();   //exceptionHandling dont ned to fix "unauthenticated"
-        $this->get('/threads/create')->assertRedirect('/login');
-        $this->post('/threads')->assertRedirect('/login');
-    }*/
-    /*function test_a_thread_requires_a_title(){
+        $this->withExceptionHandling();
+        $this->get('/threads/create')->assertRedirect('login');
+        $this->post('/threads')->assertRedirect('login');
+    }
+    function test_a_thread_requires_a_title(){
         $this->withExceptionHandling()->signIn();
-        //$this->withExceptionHandling();
-        //$this->signIn();
         $thread = make('App\Thread', ['title' => null]);
-
-        //dd($thread);
-        //dd($thread->toArray());
-        $this->post('/threads', $thread->toArray())
-            ->assertSessionHasErrors('title');
-    }*/
+        $this->post('/threads', $thread->toArray())->assertSessionHasErrors('title');
+    }
+    function test_a_thread_requires_a_body(){
+        $this->withExceptionHandling()->signIn();
+        $thread = make('App\Thread', ['body' => null]);
+        $this->post('/threads', $thread->toArray())->assertSessionHasErrors('body');
+    }
+    function test_a_thread_requires_a_proper_channel_id(){
+        $this->withExceptionHandling()->signIn();
+        factory('App\Channel', 2)->create();
+        $thread = make('App\Thread', ['channel_id' => null]);
+        $this->post('/threads', $thread->toArray())->assertSessionHasErrors('channel_id');
+    }
 }
