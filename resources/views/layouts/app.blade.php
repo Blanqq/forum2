@@ -40,6 +40,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse Threads <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/threads/">All Threads</a></li>
+                                <li><a href="/threads?popularity=1">Most Popular All Time</a></li>
                                 @if(auth()->user())
                                 <li><a href="/threads?by={{auth()->user()->name}}">My Threads</a></a></li>
                                 @endif

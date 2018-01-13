@@ -8,10 +8,9 @@
     </div>            
     <div class="panel-body">
 
-        <div class="body">
+
             {{ $reply->body }}
-        </div>
-        <hr>
+
         
     </div>
 </div>
