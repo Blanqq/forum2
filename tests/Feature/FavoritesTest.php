@@ -28,9 +28,12 @@ class FavoritesTest extends TestCase
 
         $this->signIn();
         $reply = create('App\Reply');
-        $this->post('replies/'. $reply->id.'/favorites');
-        $this->post('replies/'. $reply->id.'/favorites');
-
+        try{
+            $this->post('replies/'. $reply->id.'/favorites');
+            $this->post('replies/'. $reply->id.'/favorites');
+        } catch (\Exception $e){
+            $this->fail('Cant favorite same record twice');
+        }
         $this->assertCount(1, $reply->favorites);
 
     }
