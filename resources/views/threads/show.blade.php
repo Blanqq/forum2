@@ -5,13 +5,26 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
+
                 <div class="panel-heading">
-                    Written by {{$thread->author->name}} {{$thread->created_at}}
-                    <h1>{{ $thread->title }}</h1>
+                    <div class="level">
+                        <span class="flex">
+                            Written by {{$thread->author->name}} {{$thread->created_at}}
+                            <h1>{{ $thread->title }}</h1>
+                        </span>
+                        @can ('update', $thread)
+                            <form action="{{$thread->path()}}" method="POST">
+                                {{csrf_field()}}
+                                {{method_field('DELETE')}}
+                                <button type="submit" class="btn btn-default">Delete</button>
+                            </form>
+                        @endcan
+
+                    </div>
                 </div>
 
                 <div class="panel-body">
-                        {{ $thread->body }}
+                    {{ $thread->body }}
                     <hr>
                 </div>
             </div>

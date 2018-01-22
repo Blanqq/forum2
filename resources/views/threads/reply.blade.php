@@ -6,7 +6,7 @@
 
                     Written:
                     {{ $reply->created_at->diffForHumans()}} by
-                    <a href="#">
+                    <a href="/profiles/{{$reply->owner->name }}">
                         {{$reply->owner->name }}
                     </a>
 
@@ -15,7 +15,7 @@
                 <div class="col-xs-2">
 
                     <form class="pull-right" method="POST" action="/replies/{{$reply->id}}/favorites">
-                        {{$reply->favorites()->count()}}
+                        {{$reply->favorites_count}}
                         {{csrf_field()}}
                         <button type="submit" class="btn btn-default" {{$reply->isFavorited() ? 'disabled': ''}}>Like</button>
 

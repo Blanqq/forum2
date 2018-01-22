@@ -81,7 +81,7 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show($channelId, Thread $thread)
+    public function show(Channel $channel, Thread $thread)
     {
         //return $thread->getReplyCount();
         //return $thread->replies;
@@ -120,16 +120,34 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy($channel, Thread $thread)
     {
-        //
+    /*    if($thread->user_id != auth()->id()) {
+            abort(403, 'You dont have rights to delete this thread');
+            //if(\request()->wantsJson()){
+                //return response(['status' => 'Acces Forbiden. Permision Denied'], 403);
+            //}
+            return redirect('/login');
+        }
+    */
+        $this->authorize('update', $thread);   // authorize update request on thread if not authorized laravel automaticaly throws 403
+
+        $thread->replies()->delete();
+        $thread->delete();
+
+        if(\request()->wantsJson()){
+            return response([], 204);   // 204 - No Content
+        }
+
+        return redirect('/threads');
     }
 
     protected function getThreads(Channel $channel, ThreadFilters $filters)
     {
-        $threads = Thread::with('channel')->latest()->filter($filters);
+        //$threads = Thread::with('channel')->latest()->filter($filters);  // with loads relations not needed if relarion in $with field in model (then automatic)
+        $threads = Thread::latest()->filter($filters);
         if ($channel->exists) {
-            $threads->where('c10hannel_id', $channel->id);
+            $threads->where('channel_id', $channel->id);
         }
         return $threads->get();
     }
