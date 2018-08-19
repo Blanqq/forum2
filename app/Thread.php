@@ -8,14 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use RecordsActivity;
+
     protected $guarded =[];
     protected $with = ['author', 'channel'];
-    protected static function boot(){
+
+    protected static function boot()
+    {
         parent::boot();
         static::addGlobalScope('replyCount', function($builder){
             $builder->withCount('replies');
         });
+
+        static::deleting(function ($thread){   // if thread was deleted, delete replies to that thread
+            $thread->replies()->delete();
+        });
     }
+
+
     public function path()
     {
         //return '/threads/' . $this->channel->slug. '/' . $this->id;
