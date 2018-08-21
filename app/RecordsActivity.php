@@ -15,8 +15,9 @@ trait RecordsActivity
                $model->recordActivity($event);
             });
         }
-
-
+        static::deleting(function ($model){
+            $model->activity()->delete();
+        });
         /*static::created(function ($thread){   // every time a thread is created this function runs
             $thread->recordActivity('created');
         });*/

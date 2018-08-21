@@ -13,16 +13,21 @@ class Thread extends Model
     protected $guarded =[];
     protected $with = ['author', 'channel'];
 
-    protected static function boot()
+    public static function boot()
     {
         parent::boot();
         static::addGlobalScope('replyCount', function($builder){
             $builder->withCount('replies');
         });
-
-        static::deleting(function ($thread){   // if thread was deleted, delete replies to that thread
-            $thread->replies()->delete();
+         //if thread was deleted, delete replies to that thread
+        static::deleting(function ($thread){
+            $thread->replies->each(function ($reply){
+                $reply->delete();
+            });
         });
+//        static::deleting(function ($thread) {
+//            $thread->replies->each->delete();
+//        });
     }
 
 

@@ -114,25 +114,20 @@ class ThreadController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($channel, Thread $thread)
     {
     /*    if($thread->user_id != auth()->id()) {
-            abort(403, 'You dont have rights to delete this thread');
+            abort(403, 'You do not have rights to delete this thread');
             //if(\request()->wantsJson()){
-                //return response(['status' => 'Acces Forbiden. Permision Denied'], 403);
+                //return response(['status' => 'Access Forbidden. Permission Denied'], 403);
             //}
             return redirect('/login');
         }
     */
         $this->authorize('update', $thread);   // authorize update request on thread if not authorized laravel automaticaly throws 403
 
-        $thread->replies()->delete();
+        //$thread->replies()->delete(); // dont delete replies if using model events
         $thread->delete();
 
         if(\request()->wantsJson()){

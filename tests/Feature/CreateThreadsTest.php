@@ -63,7 +63,7 @@ class CreateThreadsTest extends TestCase
         $thread = make('App\Thread', ['channel_id' => null]);
         $this->post('/threads', $thread->toArray())->assertSessionHasErrors('channel_id');
     }
-    function test_unauthorized_user_can_delete_threads(){
+    function test_authorized_user_can_delete_threads(){
         $this->signIn();
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
         $reply = create('App\Reply', ['thread_id' => $thread->id]);
@@ -74,6 +74,14 @@ class CreateThreadsTest extends TestCase
         $this->assertDatabaseMissing('threads', ['id' => $thread->id]);
 
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+        $this->assertDatabaseMissing('activities', [
+            'subject_id' => $thread->id,
+            'subject_type' => get_class($thread)
+            ]);
+        $this->assertDatabaseMissing('activities', [
+            'subject_id' => $reply->id,
+            'subject_type' => get_class($reply)
+        ]);
     }
     function test_unauthorized_user_cant_delete_threads(){
         $this->withExceptionHandling();
