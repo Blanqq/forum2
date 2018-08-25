@@ -58,4 +58,27 @@ class ParticipateInForum extends TestCase
             'body' => $reply->body
             ]);
     }
+    public function  test_authorized_users_can_update_replies()
+    {
+        $this->signIn();
+        $reply = factory(Reply::class)->create(['user_id' => auth()->id()]);
+        $updatedBody = 'Body was edited';
+        $this->patch("/replies/{$reply->id}", ['body' => $updatedBody]);
+
+        $this->assertDatabaseHas('replies', ['id' => $reply->id,
+            'body' => $updatedBody
+            ]);
+    }
+    public function test_unauthorized_users_cannot_update_replies()
+    {
+        $this->withExceptionHandling();
+        $reply = factory(Reply::class)->create();
+
+        $this->patch("/replies/{$reply->id}")
+            ->assertStatus(403);
+
+        $this->signIn()
+            ->patch("/replies/{$reply->id}")
+            ->assertStatus(403);
+    }
 }
