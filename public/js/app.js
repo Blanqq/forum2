@@ -43782,7 +43782,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43814,6 +43814,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.editing = false;
             flash('Updated');
+        },
+        destroy: function destroy() {
+            axios.delete('/replies/' + this.attributes.id);
+            $(this.$el).fadeOut(300, function () {
+                flash('Reply was deleted');
+            });
         }
     }
 });
