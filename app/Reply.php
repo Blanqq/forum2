@@ -10,6 +10,7 @@ class Reply extends Model
 
     protected $guarded =[];
     protected $with = ['owner', 'favorites'];
+    protected $appends = ['favoritesCount', 'isFavorited'];  // custom properties who we want to append to this model only getXXXAttribute()
 
     public function owner() 
     {
