@@ -13,19 +13,20 @@
                         </a>
 
                     </h5>
+                    @if(Auth::check())
+                        <div>
+                            <favorite :reply="{{ $reply }}"></favorite>
 
-                    <div>
-                        <favorite :reply="{{ $reply }}"></favorite>
+    
+                            {{--<form class="pull-right" method="POST" action="/replies/{{$reply->id}}/favorites">
+                                {{$reply->favorites_count}}
+                                {{csrf_field()}}
+                                <button type="submit" class="btn btn-default" {{$reply->isFavorited() ? 'disabled': ''}}>Like</button>
 
+                            </form>--}}
 
-                        {{--<form class="pull-right" method="POST" action="/replies/{{$reply->id}}/favorites">
-                            {{$reply->favorites_count}}
-                            {{csrf_field()}}
-                            <button type="submit" class="btn btn-default" {{$reply->isFavorited() ? 'disabled': ''}}>Like</button>
-
-                        </form>--}}
-
-                    </div>
+                        </div>
+                    @endif
                 </div>
 
 

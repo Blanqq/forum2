@@ -8,9 +8,21 @@ class Reply extends Model
 {
     use FavoritingTrait, RecordsActivity;
 
+
+
     protected $guarded =[];
     protected $with = ['owner', 'favorites'];
     protected $appends = ['favoritesCount', 'isFavorited'];  // custom properties who we want to append to this model only getXXXAttribute()
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($thread){
+            $thread->favorites->each(function ($favorite){
+                $favorite->delete();
+            });
+        });
+    }
 
     public function owner() 
     {

@@ -21,7 +21,12 @@ trait FavoritingTrait{
     public function unfavorite()
     {
         $attributes = ['user_id' => auth()->id()];
-        $this->favorites()->where($attributes)->delete();
+
+        // each to ensure thad model event will fire, to fire event model need to delete model, not like previously make sql query
+        /*$this->favorites()->where($attributes)->get()->each(function($favorite){
+            $favorite->delete();
+        });*/
+        $this->favorites()->where($attributes)->get()->each->delete();
     }
 
     public function isFavorited()
