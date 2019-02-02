@@ -30,25 +30,12 @@
                     </div>
                 </div>
 
-                <replies :data="{{ $thread->replies }}" @removed="repliesCount--"></replies>
+                <replies :data="{{ $thread->replies }}" @added="repliesCount++" @removed="repliesCount--"></replies>
 
 
                 {{--{{ $replies->links() }}--}}
 
-                @if(auth()->check())
 
-                    <form method="POST" action="/threads/{{$thread->channel_id}}/{{$thread->id}}/replies">
-                        {{csrf_field()}}
-                        <div class="form-group">
-                            <textarea name="body" id="body" class="form-control" placeholder="Type your answer here" rows="5"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-default pull-right">Post</button>
-                        </div>
-                    </form>
-                @else
-                    <p><a href="{{route('login')}}">Plesase Sign In</a></p>
-                @endif
             </div>
 
 

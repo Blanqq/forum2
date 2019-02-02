@@ -50,7 +50,7 @@ class Thread extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
     public function addReply($reply) {
-        $this->replies()->create($reply);
+        return $this->replies()->create($reply);
     }
     public function channel(){
         return $this->belongsTo(Channel::class);
