@@ -15,8 +15,11 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// To make component global register it here
+
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('thread-view', require('./pages/Thread.vue'));
+Vue.component('paginator', require('./components/Paginator.vue'));
 
 const app = new Vue({
     el: '#app'

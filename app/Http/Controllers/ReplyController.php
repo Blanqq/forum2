@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ReplyController extends Controller
 {
+
+    public function index($chanelSlug, Thread $thread)
+    {
+        return $thread->replies()->paginate(5);
+    }
     public function store($channelId, Thread $thread)
     {
         $this->validate(request(), ['body' => 'required']);

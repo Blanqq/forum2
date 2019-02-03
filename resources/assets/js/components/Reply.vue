@@ -4,7 +4,7 @@
                 <div class="level">
                     <h5 class="flex">
                         Written:
-                        {{ data.created_at}} by
+                        {{ postedOn(data) }}... by
                         <a :href="'/profiles/'+data.owner.name" v-text="data.owner.name"></a>
                     </h5>
                     <div v-if="signedIn">
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+    import moment from 'moment';
     import Favorite from './Favorite.vue';
     export default {
         props: ['data'],
@@ -69,6 +70,9 @@
             destroy(){
                 axios.delete('/replies/'+this.data.id);
                 this.$emit('deleted', this.data.id);
+            },
+            postedOn(data){
+                return moment(data.created_at).fromNow();
             }
         }
     }
