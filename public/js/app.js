@@ -60682,6 +60682,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.dataSet = data;
             this.items = data.data;
+            window.scrollTo(0, 0);
         }
     }
 });
@@ -61793,8 +61794,6 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
         _c(
           "li",
           {
@@ -61828,16 +61827,7 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "page-item" }, [
-      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [_vm._v("1")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

@@ -2,7 +2,7 @@
 
     <ul class="pagination" v-if="shouldPaginate">
         <li class="page-item" v-show="prevUrl"><a class="page-link" href="#" rel="prev" @click.prevent="page--">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
         <li class="page-item" v-show="nextUrl"><a class="page-link" href="#" rel="next" @click.prevent="page++">Next</a></li>
     </ul>
 
