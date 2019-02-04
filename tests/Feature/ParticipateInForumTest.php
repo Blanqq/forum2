@@ -25,8 +25,9 @@ class ParticipateInForum extends TestCase
         $reply = factory('App\Reply')->create(['thread_id' => $thread->id]);
         $this->post($thread->path(). '/replies', $reply->toArray());
         
-        $this->get($thread->path())
-            ->assertSee($reply->body);
+        /*$this->get($thread->path())
+            ->assertSee($reply->body);*/
+        $this->assertDatabaseHas('replies', ['body' => $reply->body]);
     }
     public function test_a_reply_requires_a_body()
     {
