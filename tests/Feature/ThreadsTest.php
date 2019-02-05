@@ -61,7 +61,7 @@ class ExampleTest extends TestCase
             ->assertSee($threadByJohnDoe->title)
                 ->assertDontSee($otherThread->title);
     }
-    public function test_a_user_can_filterthreads_by_popularity(){
+    public function test_a_user_can_filter_threads_by_popularity(){
 
         $threadWithTwoReplys = create('App\Thread');
         create('App\Reply', ['thread_id' => $threadWithTwoReplys->id], 2);
@@ -76,6 +76,15 @@ class ExampleTest extends TestCase
         $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
 
     }
+    public function test_a_user_can_filter_threads_by_those_that_are_unanswered()
+    {
+        $thread = create('App\Thread');
+        create('App\Reply', ['thread_id' => $thread->id]);
+
+        $response = $this->getJson('threads?unanswered=1')->json();
+        $this->assertCount(1, $response);
+    }
+
     public function test_a_user_can_request_all_replies_for_a_thread()
     {
         $thread = create('App\Thread');

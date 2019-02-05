@@ -20,14 +20,22 @@ class ParticipateInForum extends TestCase
         $this->be($user = factory('App\User')->create());  //można tak w 1 lini
         
         $thread = factory('App\Thread')->create();
+
+
         
         //$reply = factory('App\Reply')->create();
-        $reply = factory('App\Reply')->create(['thread_id' => $thread->id]);
+        $reply = factory('App\Reply')->make(['thread_id' => $thread->id]);
+
+        //dd($thread->fresh()->replies_count);
         $this->post($thread->path(). '/replies', $reply->toArray());
+
+
         
         /*$this->get($thread->path())
             ->assertSee($reply->body);*/
         $this->assertDatabaseHas('replies', ['body' => $reply->body]);
+        //dd($thread->fresh()->replies);
+        $this->assertEquals(1, $thread->fresh()->replies_count);
     }
     public function test_a_reply_requires_a_body()
     {
@@ -58,6 +66,8 @@ class ParticipateInForum extends TestCase
         $this->assertDatabaseMissing('replies', ['id' => $reply->id,
             'body' => $reply->body
             ]);
+
+        $this->assertEquals(0, $reply->thread->fresh()->replies_count);
     }
     public function  test_authorized_users_can_update_replies()
     {

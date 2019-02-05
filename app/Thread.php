@@ -16,9 +16,9 @@ class Thread extends Model
     public static function boot()
     {
         parent::boot();
-        static::addGlobalScope('replyCount', function($builder){
+        /*static::addGlobalScope('replyCount', function($builder){
             $builder->withCount('replies');
-        });
+        });*/
          //if thread was deleted, delete replies to that thread
         static::deleting(function ($thread){
             $thread->replies->each(function ($reply){

@@ -20,7 +20,16 @@ class Reply extends Model
         static::deleting(function ($thread){
             $thread->favorites->each(function ($favorite){
                 $favorite->delete();
+                dd('bbb');
             });
+        });
+
+        static::deleted(function ($reply){
+            $reply->thread->decrement('replies_count');
+        });
+
+        static::created(function ($reply){
+            $reply->thread->increment('replies_count');
         });
     }
 
