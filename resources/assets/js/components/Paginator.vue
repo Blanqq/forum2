@@ -2,7 +2,12 @@
 
     <ul class="pagination" v-if="shouldPaginate">
         <li class="page-item" v-show="prevUrl"><a class="page-link" href="#" rel="prev" @click.prevent="page--">Previous</a></li>
-        <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+        <li :class="['page-item', isActivePage(i) ? activeClass : '']" v-for="i in dataSet.last_page" aria-current="page">
+            <a v-if="isActivePage(i)" class="page-link">[ {{ i }} ]
+                    <span class="sr-only">(current)</span>
+            </a>
+            <a v-else class="page-link" @click.prevent="page = i">{{ i }}</a>
+        </li>
         <li class="page-item" v-show="nextUrl"><a class="page-link" href="#" rel="next" @click.prevent="page++">Next</a></li>
     </ul>
 
@@ -16,6 +21,7 @@
                 page: 1,
                 prevUrl: false,
                 nextUrl: false,
+                activeClass: 'active',
             }
         },
         watch:{
@@ -32,6 +38,7 @@
             shouldPaginate(){
                 return !!this.prevUrl || !!this.nextUrl;
             }
+
         },
         methods:{
             broadcast(){
@@ -39,6 +46,12 @@
             },
             updateUrl(){
                 history.pushState(null, null, '?page='+this.page);
+            },
+            isActivePage(page){
+                if(this.page === page){
+                    return true;
+                }
+                else return false;
             }
         }
     }
