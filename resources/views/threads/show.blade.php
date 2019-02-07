@@ -50,6 +50,9 @@
                         and have <span v-text="repliesCount"></span> {{str_plural('reply', $thread->replies_count)}}</p>
 
                     </div>
+                    <div class="panel-footer">
+                        <subscribe-button :is-subscribed="{{ json_encode($thread->isSubscribedTo) }}"></subscribe-button>
+                    </div>
                 </div>
             </div>
         </div>
