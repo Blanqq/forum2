@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Auth;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -43,8 +44,8 @@ class ExampleTest extends TestCase
         $channel = create('App\Channel');
         //dd($channel->id);
         $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
-        $threadNotInChannel = create('App\Thread');
-        //dd($threadInChannel->title."aa".$threadNotInChannel->title);
+        $otherChannel = create('App\Channel', ['id' => ++$channel->id]);
+        $threadNotInChannel = create('App\Thread', ['channel_id' => $otherChannel->id]);
 
         $this->get('/threads/'.$channel->slug)
             ->assertSee($threadInChannel->title)
@@ -55,7 +56,11 @@ class ExampleTest extends TestCase
         $this->signIn(create('App\User', ['name' => 'JohnDoe']));
 
         $threadByJohnDoe = create('App\Thread', ['user_id' => auth()->id()]);
-        $otherThread = create('App\Thread');
+        Auth::logout();
+        $this->signIn(create('App\User'));
+
+
+        $otherThread = create('App\Thread', ['user_id' => auth()->id()]);
 
         $this->get('/threads?by=JohnDoe')
             ->assertSee($threadByJohnDoe->title)

@@ -13,7 +13,7 @@
         },
         watch:{
             isSubscribed(){
-                this.isSubscribed = isSubscribed; 
+                this.isSubscribed = isSubscribed;
             }
         },
         methods:{

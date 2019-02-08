@@ -1,6 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\User;
+use App\Channel;
+use App\Thread;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,53 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\Channel::class, function (Faker $faker){
+    $name = $faker->word;
+    return[
+        'name' => $name,
+        'slug' => $name
+    ];
+});
+
+$factory->define(App\Thread::class, function (Faker $faker){
+    return[
+        'user_id' => User::all()->count() ? User::all()->random()->id : factory(App\User::class)->create()->id,
+        'channel_id' => Channel::all()->count() ? Channel::all()->random()->id : factory(App\Channel::class)->create()->id,
+        'replies_count' => 0,
+        'title' => $faker->sentence,
+        'body' => $faker->paragraph
+    ];
+});
+
+$factory->define(App\Reply::class, function (Faker $faker){
+    return[
+        'user_id' => User::all()->count() ? User::all()->random()->id : factory(App\User::class)->create()->id,
+        'thread_id' => $thread_id = Thread::all()->count() ? Thread::all()->random()->id : factory(App\Thread::class)->create()->id,
+        'body' => $faker->paragraph
+    ];
+});
+
+$factory->define(App\Activity::class, function (Faker $faker){  // all fields should be override when fire
+    return[
+        'user_id' => $faker->randomNumber(),
+        'subject_id' => $faker->randomNumber(),
+        'subject_type' => $faker->word,
+        'type' => $faker->word
+    ];
+});
+
+
+
+// old
+/*$factory->define(App\User::class, function (Faker $faker) {
+    static $password;
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
+});
 $factory->define(App\Thread::class, function (Faker $faker){
     return[
         'user_id' => function (){
@@ -37,10 +87,9 @@ $factory->define(App\Thread::class, function (Faker $faker){
         'body' => $faker->paragraph
     ];
 });
-
 $factory->define(App\Reply::class, function (Faker $faker){
     return[
-        'user_id' => function (){
+        'user_id' =>  function (){
             return factory(App\User::class)->create()->id;
         },
         'thread_id' => function (){
@@ -49,7 +98,6 @@ $factory->define(App\Reply::class, function (Faker $faker){
         'body' => $faker->paragraph
     ];
 });
-
 $factory->define(App\Channel::class, function (Faker $faker){
     $name = $faker->word;
     return[
@@ -57,3 +105,12 @@ $factory->define(App\Channel::class, function (Faker $faker){
         'slug' => $name
     ];
 });
+
+$factory->define(App\Activity::class, function (Faker $faker){  // all fields should be override when fire
+    return[
+        'user_id' => $faker->randomNumber(),
+        'subject_id' => $faker->randomNumber(),
+        'subject_type' => $faker->word,
+        'type' => $faker->word
+    ];
+});*/
