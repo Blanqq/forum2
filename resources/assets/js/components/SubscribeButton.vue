@@ -8,7 +8,6 @@
         props: ['isSubscribed'],
         data(){
             return{
-                isSubscribed: ''
             }
         },
         watch:{

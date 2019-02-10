@@ -5,6 +5,7 @@ namespace App;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\ThreadWasUpdated;
 
 class Thread extends Model
 {
@@ -47,13 +48,34 @@ class Thread extends Model
     public function getReplyCount(){
         return $this->replies()->count();
     }
-    public function author() {
+    public function author()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function addReply($reply) {
-        return $this->replies()->create($reply);
+    public function addReply($reply)
+    {
+        $reply = $this->replies()->create($reply);
+
+        $this->subscriptions->filter(function ($sub) use ($reply){
+            return $sub->user_id != $reply->user_id;
+        })->each->notify($reply);
+
+        /*->each(function ($sub) use ($reply){
+            $sub->user->notify(new ThreadWasUpdated($this, $reply));
+        });*/
+
+        /*foreach ($this->subscriptions as $subscription)
+        {
+            if($subscription->user_id != $reply->user_id)
+            {
+                $subscription->user->notify(new ThreadWasUpdated($this, $reply));
+            }
+        }*/
+
+        return $reply;
     }
-    public function channel(){
+    public function channel()
+    {
         return $this->belongsTo(Channel::class);
     }
     public function scopeFilter($query, ThreadFilters $filters)
@@ -65,6 +87,7 @@ class Thread extends Model
         $this->subscriptions()->create([
             'user_id' => $userId ?: auth()->id()
         ]);
+        return $this;
     }
     public function unsubscribe($userId = null)
     {
