@@ -6,6 +6,7 @@ use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Notifications\ThreadWasUpdated;
+use App\Events\ThreadHasNewReply;
 
 class Thread extends Model
 {
@@ -56,21 +57,8 @@ class Thread extends Model
     {
         $reply = $this->replies()->create($reply);
 
-        $this->subscriptions->filter(function ($sub) use ($reply){
-            return $sub->user_id != $reply->user_id;
-        })->each->notify($reply);
-
-        /*->each(function ($sub) use ($reply){
-            $sub->user->notify(new ThreadWasUpdated($this, $reply));
-        });*/
-
-        /*foreach ($this->subscriptions as $subscription)
-        {
-            if($subscription->user_id != $reply->user_id)
-            {
-                $subscription->user->notify(new ThreadWasUpdated($this, $reply));
-            }
-        }*/
+        event(new ThreadHasNewReply($this, $reply));
+        //$this->subscriptions->where('user_id', '!=', $reply->user_id)->each->notify($reply);
 
         return $reply;
     }
