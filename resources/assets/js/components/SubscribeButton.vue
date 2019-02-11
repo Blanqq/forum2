@@ -5,14 +5,9 @@
 
 <script>
     export default {
-        props: ['isSubscribed'],
         data(){
             return{
-            }
-        },
-        watch:{
-            isSubscribed(){
-                this.isSubscribed = isSubscribed;
+                isSubscribed: this.isSubscribed,
             }
         },
         methods:{

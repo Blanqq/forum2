@@ -61700,7 +61700,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -61718,26 +61718,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['isSubscribed'],
+    // props: ['isSubscribed'],
     data: function data() {
-        return {};
+        return {
+            isSubscribed: this.isSubscribed
+        };
     },
 
-    watch: {
-        isSubscribed: function (_isSubscribed) {
-            function isSubscribed() {
-                return _isSubscribed.apply(this, arguments);
-            }
-
-            isSubscribed.toString = function () {
-                return _isSubscribed.toString();
-            };
-
-            return isSubscribed;
-        }(function () {
-            this.isSubscribed = isSubscribed;
-        })
-    },
+    /*        watch:{
+                isSubscribed(){
+                    isSubscribed = this.isSubscribed;
+                }
+            },*/
     methods: {
         subscribe: function subscribe() {
             axios.post(location.pathname + '/subscriptions');
