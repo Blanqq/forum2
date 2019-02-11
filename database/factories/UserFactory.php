@@ -62,6 +62,18 @@ $factory->define(App\Activity::class, function (Faker $faker){  // all fields sh
     ];
 });
 
+$factory->define(\Illuminate\Notifications\DatabaseNotification::class, function(){
+    return[
+        'id' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
+        'type' => 'App\Notifications\ThreadWasUpdated',
+        'notifiable_id' => function(){
+            return auth()->id() ?: factory('App\User')->create()->id;
+        },
+        'notifiable_type' => 'App\User',
+        'data' => ['foo' => 'bar']
+    ];
+});
+
 
 
 // old
