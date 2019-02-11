@@ -44,7 +44,7 @@ class NotificationTest extends TestCase
     }
     public function test_user_can_mark_notifications_as_read()
     {
-        
+
 
         create(DatabaseNotification::class);
         $this->assertCount(1, auth()->user()->unreadNotifications);
