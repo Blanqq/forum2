@@ -6,6 +6,7 @@ use App\Channel;
 use App\Filters\ThreadFilters;
 use App\Thread;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ThreadController extends Controller
 {
@@ -83,6 +84,13 @@ class ThreadController extends Controller
      */
     public function show(Channel $channel, Thread $thread)
     {
+
+        if(auth()->check())
+        {
+            cache()->forever(auth()->user()->visitedThreadCacheKey($thread), Carbon::now());
+        }
+
+
         //return $thread->getReplyCount();
         //return $thread->replies;
         return view('threads.show', compact('thread') );

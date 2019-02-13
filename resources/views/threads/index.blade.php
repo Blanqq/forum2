@@ -10,7 +10,11 @@
                         <div class="level">
                             <h3>
                                 <a href="{{$thread->path()}}">
-                                    {{ $thread->title }}
+                                    @if($thread->hasUpdatesFor(auth()->user()))
+                                        <strong>{{ $thread->title }}</strong>
+                                    @else
+                                        {{ $thread->title }}
+                                    @endif
                                 </a>
                             </h3>
                             Created by

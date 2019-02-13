@@ -90,4 +90,16 @@ class ThreadTest extends TestCase
         $this->assertTrue($thread->isSubscribedTo);
     }
 
+    public function test_check_if_authenticated_user_has_read_all_replies()
+    {
+        $this->signIn();
+        $thread = create('App\Thread');
+        $this->assertTrue($thread->hasUpdatesFor(auth()->user()));
+
+        //$key = sprintf("users.%s.visits.%s", auth()->id(), $thread->id);
+        cache()->forever(auth()->user()->visitedThreadCacheKey($thread), \Carbon\Carbon::now());
+
+        $this->assertFalse($thread->hasUpdatesFor(auth()->user()));
+    }
+
 }
