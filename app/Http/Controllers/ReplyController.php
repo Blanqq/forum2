@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Reply;
 use App\Thread;
-use App\Spam;
+use App\Inspections\Spam;
 
 use Illuminate\Http\Request;
 
