@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Reply extends Model
 {
@@ -45,5 +46,11 @@ class Reply extends Model
     {
         return $this->thread->path()."#reply-{$this->id}";
         //return "/replies/{$this->reply->id}";
+    }
+
+    public function wasJustPublished()
+    {
+        //dd($this->latest()->first()->created_at, Carbon::now()->subMinute());
+        return $this->latest()->first()->created_at->gt(Carbon::now()->subMinute());
     }
 }
