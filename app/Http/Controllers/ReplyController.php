@@ -17,8 +17,14 @@ class ReplyController extends Controller
     public function store($channelId, Thread $thread)
     {
         try{
-            //$this->validate(request(), ['body' => 'required|spamfree']);
             $this->authorize('create', new Reply);
+        }catch(\Exception $e){
+            return response('You post too frequently. Wait a minute since your last post.', 429);
+        }
+
+        try{
+            //$this->validate(request(), ['body' => 'required|spamfree']);
+
             request()->validate([
                 'body' => ['required', new SpamFree]
             ]);
@@ -33,7 +39,7 @@ class ReplyController extends Controller
         if(request()->expectsJson()){
             return $reply->load('owner');
         }
-        return back()->with('flash', 'Your reply has been posted');
+        //return back()->with('flash', 'Your reply has been posted');
     }
     public function destroy(Reply $reply)
     {

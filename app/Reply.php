@@ -51,6 +51,6 @@ class Reply extends Model
     public function wasJustPublished()
     {
         //dd($this->latest()->first()->created_at, Carbon::now()->subMinute());
-        return $this->latest()->first()->created_at->gt(Carbon::now()->subMinute());
+        return $this->created_at->gt(Carbon::now()->subMinute());
     }
 }
