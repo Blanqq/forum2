@@ -6,8 +6,10 @@ use App\Reply;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\SpamFree;
 use App\Exceptions\ThrottleException;
+use Illuminate\Support\Facades\Gate;
 
-class CreatePostRequest extends FormRequest
+
+class CreateReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +18,7 @@ class CreatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Gate::denies('create', new Reply);
+        return Gate::allows('create', new Reply);
     }
 
     public function failedAuthorization()
@@ -32,7 +34,7 @@ class CreatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required', new SpamFree]   //'body' => 'required|spamfree'
+            'body' => ['required', new SpamFree]
         ];
     }
 }

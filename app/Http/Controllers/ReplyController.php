@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateReplyRequest;
 use App\Reply;
 use App\Rules\SpamFree;
 use App\Thread;
@@ -14,31 +15,15 @@ class ReplyController extends Controller
     {
         return $thread->replies()->paginate(5);
     }
-    public function store($channelId, Thread $thread)
+    public function store($channelId, Thread $thread, CreateReplyRequest $createPostRequest)
     {
-        try{
-            $this->authorize('create', new Reply);
-        }catch(\Exception $e){
-            return response('You post too frequently. Wait a minute since your last post.', 429);
-        }
-
-        try{
-            //$this->validate(request(), ['body' => 'required|spamfree']);
-
-            request()->validate([
-                'body' => ['required', new SpamFree]
-            ]);
             $reply = $thread->addReply([
                 'body' => request('body'),
                 'user_id' => auth()->id()
             ]);
-        }catch (\Exception $e){
-            return response('Sorry, your reply could not be saved at this time',422);
-        }
 
-        if(request()->expectsJson()){
             return $reply->load('owner');
-        }
+
         //return back()->with('flash', 'Your reply has been posted');
     }
     public function destroy(Reply $reply)

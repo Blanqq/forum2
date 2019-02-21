@@ -43,7 +43,7 @@ class ParticipateInForum extends TestCase
         $thread = create('App\Thread');
         $reply = make('App\Reply', ['body' => null]);
 
-        $this->post($thread->path().'/replies', $reply->toArray())->assertStatus(422);
+        $this->post($thread->path().'/replies', $reply->toArray())->assertSessionHasErrors('body');
     }
     public function test_unauthorized_users_cannot_delete_replies()
     {
@@ -95,16 +95,18 @@ class ParticipateInForum extends TestCase
 
     public function test_replies_that_contain_spam_may_not_be_created()
     {
+        $this->withExceptionHandling();
         $this->signIn();
         $thread = create('App\Thread');
         $reply = make('App\Reply', ['body' => 'Yahoo Customer Support']);
 
-        $this->post($thread->path().'/replies', $reply->toArray())->assertStatus(422);
+        $this->json( 'post',$thread->path().'/replies', $reply->toArray())->assertStatus(422);
 
     }
 
     public function test_users_may_post_once_per_minute()
     {
+        $this->withExceptionHandling();
         $this->signIn();
         $thread = create('App\Thread');
 

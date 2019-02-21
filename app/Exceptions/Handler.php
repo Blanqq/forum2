@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use App\Exceptions\ThrottleException;
 
 class Handler extends ExceptionHandler
 {
@@ -56,7 +58,17 @@ class Handler extends ExceptionHandler
     {
         //if (app()->environment() === 'testing') throw $exception;
         //return parent::render($request, $exception);
+        //dd($exception->getMessage());
+        if ($exception instanceof ValidationException){
+            //dd(json_encode($exception->errors()));
+            if($request->expectsJson()){
+                return response('Validation has failed', 422);
+            }
+        }
 
+        if ($exception instanceof ThrottleException){
+            return response('You reply too often, to send next post wait a minute.', 429);
+        }
         return parent::render($request, $exception);
     }
     protected function unauthenticated($request, AuthenticationException $exception)
