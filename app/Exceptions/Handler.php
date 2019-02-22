@@ -56,11 +56,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        //if (app()->environment() === 'testing') throw $exception;
-        //return parent::render($request, $exception);
-        //dd($exception->getMessage());
         if ($exception instanceof ValidationException){
-            //dd(json_encode($exception->errors()));
             if($request->expectsJson()){
                 return response('Validation has failed', 422);
             }
