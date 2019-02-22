@@ -51,7 +51,7 @@ class ParticipateInForum extends TestCase
         $reply = factory(Reply::class)->create();
 
         $this->delete("/replies/{$reply->id}")
-            ->assertStatus(403);
+            ->assertRedirect('login');
 
         $this->signIn()
             ->delete("/replies/{$reply->id}")
@@ -86,7 +86,7 @@ class ParticipateInForum extends TestCase
         $reply = factory(Reply::class)->create();
 
         $this->patch("/replies/{$reply->id}")
-            ->assertStatus(403);
+            ->assertRedirect('login');
 
         $this->signIn()
             ->patch("/replies/{$reply->id}")

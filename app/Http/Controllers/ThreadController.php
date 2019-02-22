@@ -21,18 +21,6 @@ class ThreadController extends Controller
     }
     public function index(Channel $channel, ThreadFilters $filters)
     {
-        /*if($channel->exists){
-            //$channelId = Channel::where('slug', $channelSlug)->first()->id;
-            //$threads = Thread::where('channel_id', $channelId)->latest()->get();
-            $threads = $channel->threads()->latest();
-        }else{
-            $threads = Thread::latest();
-        }if($username = request('by')){
-            $user = \App\User::where('name', $username)->firstOrFail();
-            $threads->where('user_id', $user->id);
-        }
-        $threads = $threads->get();*/
-
         $threads = $this->getThreads($channel, $filters);
 
         if (request()->wantsJson()){

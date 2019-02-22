@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 
 class ReplyController extends Controller
 {
-
+    public function __construct() {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
     public function index($chanelSlug, Thread $thread)
     {
         return $thread->replies()->paginate(5);
@@ -42,14 +44,10 @@ class ReplyController extends Controller
     public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
-        try{
-            request()->validate([
-                'body' => ['required', new SpamFree]
-            ]);
-            $reply->update(['body' => request('body')]);
-        }catch (\Exception $e){
-            return response('Sorry, your reply could not be saved at this time',422);
-        }
+        request()->validate([
+            'body' => ['required', new SpamFree]
+        ]);
+        $reply->update(['body' => request('body')]);
     }
    
 }
