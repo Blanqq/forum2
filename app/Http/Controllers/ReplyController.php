@@ -23,15 +23,7 @@ class ReplyController extends Controller
                 'body' => request('body'),
                 'user_id' => auth()->id()
             ]);
-            preg_match_all('/\@(\w+)/', $reply->body,$matches);
-            $user_names = $matches[1];
-            foreach ($user_names as $name)
-            {
-                $user = User::where('name', $name)->first();
-                if($user){
-                    $user->notify(new UserWasMentioned($reply));
-                }
-            }
+
             return $reply->load('owner');
 
         //return back()->with('flash', 'Your reply has been posted');
