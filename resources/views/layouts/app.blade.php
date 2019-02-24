@@ -29,6 +29,8 @@
         [v-cloak] {display: none;}
     </style>
 
+    @yield('header')
+
 </head>
 <body>
     <div id="app">
@@ -36,10 +38,10 @@
 
         @yield('content')
         <flash message="{{ session('flash') }}"></flash>
-        {{--<flash message="dfkgjhfdkgjhdsfkgjhdfkjgdfhksdjfghk"></flash>--}}
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>
