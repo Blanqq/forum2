@@ -78,7 +78,7 @@ class ExampleTest extends TestCase
 
         $response = $this->getJson('threads?popularity=1')->json();
 
-        $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
+        $this->assertEquals([3, 2, 0], array_column($response['data'], 'replies_count'));
 
     }
     public function test_a_user_can_filter_threads_by_those_that_are_unanswered()
@@ -87,7 +87,7 @@ class ExampleTest extends TestCase
         create('App\Reply', ['thread_id' => $thread->id]);
 
         $response = $this->getJson('threads?unanswered=1')->json();
-        $this->assertCount(1, $response);
+        $this->assertCount(1, $response['data']);
     }
 
     public function test_a_user_can_request_all_replies_for_a_thread()
