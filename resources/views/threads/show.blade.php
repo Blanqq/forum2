@@ -14,7 +14,8 @@
                     <div class="panel-heading">
                         <div class="level">
                             <span class="flex">
-                                Written by {{$thread->author->name}} {{$thread->created_at}}
+                                    <img src="{{ $thread->author->avatar() }}" alt="" width="30" height="30">
+                                Written by <a href="/profiles/{{$thread->author->name}}">{{$thread->author->name}}</a> {{$thread->created_at}}
                                 <h1>{{ $thread->title }}</h1>
                             </span>
                             @can ('update', $thread)
