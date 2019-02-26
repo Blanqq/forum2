@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -44,3 +44,4 @@ Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionCont
 Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@destroy')->middleware('auth');
 
 Route::get('api/users', 'Api\UserController@index');
+Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth');
