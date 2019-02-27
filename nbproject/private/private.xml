@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Code/Homestead/forum2/app/Http/Controllers/ThreadController.php</file>
-            <file>file:/C:/Code/Homestead/forum2/database/factories/UserFactory.php</file>
-            <file>file:/C:/Code/Homestead/forum2/tests/TestCase.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Providers/AppServiceProvider.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Reply.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Channel.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/User.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Favorite.php</file>
             <file>file:/C:/Code/Homestead/forum2/resources/views/threads/create.blade.php</file>
             <file>file:/C:/Code/Homestead/forum2/routes/web.php</file>
             <file>file:/C:/Code/Homestead/forum2/tests/Feature/ThreadsTest.php</file>
-            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/show.blade.php</file>
-            <file>file:/C:/Code/Homestead/forum2/resources/views/layouts/app.blade.php</file>
-            <file>file:/C:/Code/Homestead/forum2/tests/Feature/CreateThreadsTest.php</file>
             <file>file:/C:/Code/Homestead/forum2/app/Thread.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Http/Controllers/ReplyController.php</file>
         </group>
     </open-files>
 </project-private>
