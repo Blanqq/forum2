@@ -1,19 +1,23 @@
 <template>
     <div>
-       <img :src="avatar" alt="" width="100" height="100">
-       <h2>{{ profileUser.name }}</h2>
+        <div class="level">
+            <img :src="avatar" alt="" width="100" height="100">
+            <h1>{{ profileUser.name }}</h1>
+        </div>
         <p v-text="'Account created at '+profileUser.created_at"></p>
 
         <form v-if="canBeUpdated" method="POST" :action="'/api/users/'+profileUser.id+'/avatar'" enctype="multipart/form-data">
-            <input type="file" name="avatar" accept="image/*" @change="onChange">
+            <avatar-upload name="avatar" @loaded="onLoad"></avatar-upload>
         </form>
     </div>
 
 </template>
 
 <script>
+    import AvatarUpload from './AvatarUpload.vue';
     export default {
-        props:['profile-user'],
+        props: ['profile-user'],
+        components: { AvatarUpload },
         data(){
             return{
                 avatar: this.profileUser.avatar_path,
@@ -25,17 +29,9 @@
             }
         },
         methods:{
-            onChange(e){
-                if(!e.target.files.length) return;
-                let file = e.target.files[0];
-                let reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = e => {
-                    this.avatar = e.target.result;
-                };
-
-                this.persist(file);
-
+            onLoad(avatar){
+                this.avatar = avatar.src;
+                this.persist(avatar.file);
             },
             persist(file){
                 let data = new FormData();

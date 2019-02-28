@@ -14,7 +14,7 @@
                     <div class="panel-heading">
                         <div class="level">
                             <span class="flex">
-                                    <img src="{{ $thread->author->avatar() }}" alt="" width="30" height="30">
+                                    <img src="{{ $thread->author->avatar_path }}" alt="" width="30" height="30">
                                 Written by <a href="/profiles/{{$thread->author->name}}">{{$thread->author->name}}</a> {{$thread->created_at}}
                                 <h1>{{ $thread->title }}</h1>
                             </span>
