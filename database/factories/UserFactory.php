@@ -40,6 +40,7 @@ $factory->define(App\Thread::class, function (Faker $faker){
         'user_id' => User::all()->count() ? User::all()->random()->id : factory(App\User::class)->create()->id,
         'channel_id' => Channel::all()->count() ? Channel::all()->random()->id : factory(App\Channel::class)->create()->id,
         'replies_count' => 0,
+        'visits_count' => 0,
         'title' => $faker->sentence,
         'body' => $faker->paragraph
     ];
