@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Filters\ThreadFilters;
 use App\Thread;
+use App\Trending;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Rules\SpamFree;
-use Illuminate\Support\Facades\Redis;
 
 class ThreadController extends Controller
 {
@@ -20,16 +20,21 @@ class ThreadController extends Controller
     public function __construct() {
         $this->middleware('auth')->except(['index','show']);
     }
-    public function index(Channel $channel, ThreadFilters $filters)
+    public function index(Channel $channel, ThreadFilters $filters, Trending $trending)
     {
         $threads = $this->getThreads($channel, $filters);
 
         if (request()->wantsJson()){
             return $threads;
         }
-        $trending = array_map('json_decode', Redis::zrevrange('trending_threads', 0, 5));
 
-        return view('threads.index', compact('threads', 'trending'));
+
+        //$trending = array_map('json_decode', Redis::zrevrange('trending_threads', 0, 5));
+
+        return view('threads.index', [
+            'threads' => $threads,
+            'trending' => $trending->get()
+        ]);
     }
 
     /**
@@ -72,19 +77,15 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show(Channel $channel, Thread $thread)
+    public function show(Channel $channel, Thread $thread, Trending $trending)
     {
 
         if(auth()->check())
         {
             cache()->forever(auth()->user()->visitedThreadCacheKey($thread), Carbon::now());
         }
-        Redis::zincrby('trending_threads', 1, json_encode([
-            'title' => $thread->title,
-            'path' => $thread->path()
-        ]));
 
-
+        $trending->increment($thread);
 
         return view('threads.show', compact('thread'));
     }
