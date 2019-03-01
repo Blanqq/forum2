@@ -28,6 +28,9 @@
             </div>
             <hr>
         </div>
+        <div class="panel-footer">
+            {{ $thread->visits() }} Visits
+        </div>
     </div>
 
 @empty{{-- jeżeli do danego kanału nie ma przypisanych wątków wyświetl <p>...</p>--}}

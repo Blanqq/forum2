@@ -10,7 +10,7 @@ use App\Events\ThreadHasNewReply;
 
 class Thread extends Model
 {
-    use RecordsActivity;
+    use RecordsActivity, RecordsVisits;
 
     protected $guarded =[];
     protected $with = ['author', 'channel'];
@@ -99,4 +99,5 @@ class Thread extends Model
             return false;
         }
     }
+
 }
