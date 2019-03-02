@@ -43,5 +43,7 @@ Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store');
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@store')->middleware('auth');
 Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@destroy')->middleware('auth');
 
+Route::get('register/confirm', 'Auth\RegisterConfirmationController@index');
+
 Route::get('api/users', 'Api\UserController@index');
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth');
