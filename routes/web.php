@@ -20,7 +20,7 @@ Auth::routes();
 
 //Route::get('/login', )
 Route::get('/home', 'HomeController@index');
-Route::get('/threads', 'ThreadController@index');
+Route::get('/threads', 'ThreadController@index')->name('threads');
 Route::post('/threads', 'ThreadController@store')->middleware('must-be-confirmed');
 
 Route::get('/threads/create', 'ThreadController@create');
@@ -43,7 +43,7 @@ Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store');
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@store')->middleware('auth');
 Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@destroy')->middleware('auth');
 
-Route::get('register/confirm', 'Auth\RegisterConfirmationController@index');
+Route::get('register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 
 Route::get('api/users', 'Api\UserController@index');
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth');

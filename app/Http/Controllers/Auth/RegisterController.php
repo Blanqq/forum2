@@ -6,6 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PleaseConfirmYourEmail;
 
 class RegisterController extends Controller
 {
@@ -62,11 +65,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        do{
+            $token = str_random(25);
+        }while (User::where('confirmation_token', $token)->exists());
+
         return User::forceCreate([    // force means ignore mass assignment issue
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'confirmation_token' => str_random(25)
         ]);
+    }
+    protected function registered(Request $request, $user)
+    {
+        Mail::to($user)->send(new PleaseConfirmYourEmail($user));
+
+        return redirect($this->redirectPath());
     }
 }

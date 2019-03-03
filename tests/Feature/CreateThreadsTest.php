@@ -18,36 +18,24 @@ class CreateThreadsTest extends TestCase
     public function test_an_authenticated_user_can_create_new_threads()
     {
         $this->signIn();
-        //$this->be($user = factory('App\User')->create());
-        //user loged in
         
-        $thread = make('App\Thread');   // used function create from utilities/functions.php
-        //$thread = factory('App\Thread')->create();
-        //create thread
-        
-        $response = $this->post('/threads', $thread->toArray());
-        //visit thread page
-        //dd($thread->path());
+        $thread = make('App\Thread');
 
-        //dd($response->headers->get('Location'));
+        $response = $this->post(route('threads'), $thread->toArray());
 
         $this->get($response->headers->get('Location'))
             ->assertSee($thread->title)
             ->assertSee($thread->body);
-        //$this->assertSee($thread->title);
-        
-        
-                
-        //check if thread exists
     }
 
     public function test_authenticated_user_must_confirm_email_address_before_creating_threads()
     {
-        $this->withExceptionHandling();
-        $this->signIn();
+        $user = factory('App\User')->states('unconfirmed')->create();
+
+        $this->signIn($user);
         $thread = make('App\Thread');
         $this->post('/threads', $thread->toArray())
-            ->assertRedirect('/threads')
+            ->assertRedirect(route('threads'))
             ->assertSessionHas('flash', 'You must confirm your email address first');
 
     }
@@ -56,23 +44,23 @@ class CreateThreadsTest extends TestCase
     {
         $this->withExceptionHandling();
         $this->get('/threads/create')->assertRedirect('login');
-        $this->post('/threads')->assertRedirect('login');
+        $this->post(route('threads'))->assertRedirect('login');
     }
     function test_a_thread_requires_a_title(){
         $this->withExceptionHandling()->signIn();
         $thread = make('App\Thread', ['title' => null]);
-        $this->post('/threads', $thread->toArray())->assertSessionHasErrors('title');
+        $this->post(route('threads'), $thread->toArray())->assertSessionHasErrors('title');
     }
     function test_a_thread_requires_a_body(){
         $this->withExceptionHandling()->signIn();
         $thread = make('App\Thread', ['body' => null]);
-        $this->post('/threads', $thread->toArray())->assertSessionHasErrors('body');
+        $this->post(route('threads'), $thread->toArray())->assertSessionHasErrors('body');
     }
     function test_a_thread_requires_a_proper_channel_id(){
         $this->withExceptionHandling()->signIn();
         factory('App\Channel', 2)->create();
         $thread = make('App\Thread', ['channel_id' => null]);
-        $this->post('/threads', $thread->toArray())->assertSessionHasErrors('channel_id');
+        $this->post(route('threads'), $thread->toArray())->assertSessionHasErrors('channel_id');
     }
     function test_authorized_user_can_delete_threads(){
         $this->signIn();
