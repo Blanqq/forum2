@@ -10,6 +10,7 @@ class RegisterConfirmationController extends Controller
 {
     public function index()
     {
-        User::where('confirmation_token', request('token'))->firstOrFail()->update(['confirmed' => true]);
+        User::where('confirmation_token', request('token'))->firstOrFail()->confirm();
+        return redirect('/threads')->with('flash', 'Your email address is confirmed, You can now post to the forum');
     }
 }
