@@ -15,7 +15,14 @@ class ExampleTest extends TestCase
         parent::setUp();
         $this->thread = factory('App\Thread')->create();//1
     }
-    
+
+    public function test_thread_have_a_path()
+    {
+        $thread = create('App\Thread');
+
+        $this->assertEquals("/threads/{$thread->channel->slug}/{$thread->slug}",  $thread->path() );
+    }
+
     public function test_a_user_can_read_all_threads()
     {
         //$thread = factory('App\Thread')->create();//1
