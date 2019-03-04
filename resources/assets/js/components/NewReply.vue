@@ -33,9 +33,9 @@
             }
         },
         computed:{
-            signedIn() {
+/*            signedIn() {
                 return window.App.signedIn;
-            }
+            }*/
         },
         mounted(){
             $('#body').atwho({
