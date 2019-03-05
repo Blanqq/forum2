@@ -103,4 +103,12 @@ class ThreadTest extends TestCase
         $this->assertFalse($thread->hasUpdatesFor(auth()->user()));
     }
 
+    public function test_threadCanBeLocked()
+    {
+        $thread = create('App\Thread');
+        $this->assertFalse($thread->locked);
+        $thread->lock();
+        $this->assertTrue($thread->locked);
+    }
+
 }

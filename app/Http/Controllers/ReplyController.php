@@ -21,12 +21,17 @@ class ReplyController extends Controller
     }
     public function store($channelId, Thread $thread, CreateReplyRequest $createReplyRequest)
     {
-            $reply = $thread->addReply([
-                'body' => request('body'),
-                'user_id' => auth()->id()
-            ]);
+        if($thread->locked)
+        {
+            return response('Threads is locked', 422);
+        }
 
-            return $reply->load('owner');
+        $reply = $thread->addReply([
+            'body' => request('body'),
+            'user_id' => auth()->id()
+        ]);
+
+        return $reply->load('owner');
 
         //return back()->with('flash', 'Your reply has been posted');
     }

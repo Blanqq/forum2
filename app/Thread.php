@@ -75,6 +75,12 @@ class Thread extends Model
     {
         return $this->belongsTo(Channel::class);
     }
+
+    public function lock()
+    {
+        $this->update(['locked' => true]);
+    }
+
     public function scopeFilter($query, ThreadFilters $filters)
     {
        return $filters->apply($query);
@@ -123,4 +129,6 @@ class Thread extends Model
     {
         $this->update(['best_reply_id' => $reply->id]);
     }
+
+
 }
