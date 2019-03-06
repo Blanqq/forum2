@@ -18,6 +18,12 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('user');
         $user->confirmed = 1;
         $user->save();
+        $user2 = new User();
+        $user2->name = 'UserAdmin';
+        $user2->email = 'useradmin@example.com';
+        $user2->password = bcrypt('useradmin');
+        $user2->confirmed = 1;
+        $user2->save();
 
         factory(User::class, 10)->create();
     }

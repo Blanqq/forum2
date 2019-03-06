@@ -39,6 +39,9 @@ Route::get('/profiles/{user}/notifications', 'UserNotificationController@index')
 
 
 Route::get('/threads/{channel}/{thread}', 'ThreadController@show');
+//Route::patch('/threads/{channel}/{thread}', 'ThreadController@update')->name('threads.update');
+Route::post('/locked-threads/{thread}', 'LockedThreadController@store')->name('locked-threads.store')->middleware('administrator');
+Route::delete('locked-threads/{thread}', 'LockedThreadController@destroy')->name('locked-threads.destroy');
 Route::delete('/threads/{channel}/{thread}', 'ThreadController@destroy');
 Route::get('/threads/{channel}/{thread}/replies', 'ReplyController@index');
 Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store');

@@ -4,7 +4,8 @@
             <reply :data-reply="reply"  @deleted="remove(index)"></reply>
         </div>
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
-        <new-reply :endpoint="endpoint" @created="add"></new-reply>
+        <h1 v-if="$parent.locked">Threads is locked. You can not reply to this thread.</h1>
+        <new-reply :endpoint="endpoint" @created="add" v-if="!$parent.locked"></new-reply>
     </div>
 
 </template>

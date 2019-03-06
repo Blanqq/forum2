@@ -15,6 +15,9 @@ class Thread extends Model
     protected $guarded =[];
     protected $with = ['author', 'channel'];
     protected $append = ['isSubscribedTo'];
+    protected $casts = [
+        'locked' => 'boolean'
+    ];
 
     public function getRouteKeyName()
     {
@@ -76,9 +79,14 @@ class Thread extends Model
         return $this->belongsTo(Channel::class);
     }
 
-    public function lock()
+    public function close()
     {
         $this->update(['locked' => true]);
+    }
+
+    public function open()
+    {
+        $this->update(['locked' => false]);
     }
 
     public function scopeFilter($query, ThreadFilters $filters)

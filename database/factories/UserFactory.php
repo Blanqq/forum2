@@ -34,6 +34,12 @@ $factory->state(App\User::class, 'unconfirmed', function (){
    ];
 });
 
+$factory->state(App\User::class, 'administrator', function (){
+    return[
+        'name' => 'UserAdmin'
+    ];
+});
+
 $factory->define(App\Channel::class, function (Faker $faker){
     $name = $faker->word;
     return[
