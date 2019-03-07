@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('header')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -29,7 +33,10 @@
                             </select>
                         </div>
 
-                        @if (count($errors))
+                        <div class="g-recaptcha" data-sitekey="6LdYQJYUAAAAAP5QWIhYV_a5LoaUPmRBFdNble92"></div>
+
+
+                    @if (count($errors))
                             <ul class="alert alert-danger">
                                 @foreach($errors->all() as $error)
                                     <li>{{$error}}</li>
