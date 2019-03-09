@@ -106,6 +106,40 @@ class CreateThreadsTest extends TestCase
             'subject_type' => get_class($reply)
         ]);
     }
+
+    public function test_thread_can_be_updated()
+    {
+        $this->signIn();
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $this->patch($thread->path(),[
+            'title' => 'Edited Title',
+            'body' => 'Edited Body'
+        ]);
+        $this->assertEquals('Edited Title', $thread->fresh()->title);
+        $this->assertEquals('Edited Body', $thread->fresh()->body);
+    }
+
+    public function test_thread_requires_title_and_body_to_be_updated()
+    {
+        $this->withExceptionHandling();
+        $this->signIn();
+        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $this->patch($thread->path(),[
+            'title' => 'Edited Title'
+        ])->assertSessionHasErrors('body');
+    }
+
+    public function test_unauthorized_user_can_not_update_thread()
+    {
+        $this->withExceptionHandling();
+        $this->signIn();
+        $thread = create('App\Thread', ['user_id' => 99999]);
+        $this->patch($thread->path(),[
+            'title' => 'Edited Title',
+            'body' => 'Edited Body'
+        ])->assertStatus(403);
+    }
+
     function test_unauthorized_user_cant_delete_threads(){
         $this->withExceptionHandling();
         $thread = create('App\Thread');

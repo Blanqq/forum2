@@ -60616,7 +60616,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             repliesCount: this.dataThread.replies_count,
             locked: this.dataThread.locked,
-            slug: this.dataThread.slug
+            channel: this.dataThread.channel,
+            slug: this.dataThread.slug,
+            title: this.dataThread.title,
+            body: this.dataThread.body,
+            editing: false
         };
     },
 
@@ -60628,6 +60632,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         unlock: function unlock() {
             axios.delete('/locked-threads/' + this.slug);
             this.locked = false;
+        },
+        update: function update() {
+            axios.patch('/threads/' + this.channel.slug + '/' + this.slug, {
+                title: this.title,
+                body: this.body
+            }).catch(function (error) {
+                flash(error.response.data, 'danger');
+            });
+            this.editing = false;
+            flash('Updated');
+        },
+        cancel: function cancel() {
+            this.editing = false;
+            this.title = this.dataThread.title;
+            this.body = this.dataThread.body;
         }
     }
 });

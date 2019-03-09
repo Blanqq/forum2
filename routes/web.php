@@ -43,6 +43,7 @@ Route::get('/threads/{channel}/{thread}', 'ThreadController@show');
 Route::post('/locked-threads/{thread}', 'LockedThreadController@store')->name('locked-threads.store')->middleware('administrator');
 Route::delete('locked-threads/{thread}', 'LockedThreadController@destroy')->name('locked-threads.destroy');
 Route::delete('/threads/{channel}/{thread}', 'ThreadController@destroy');
+Route::patch('/threads/{channel}/{thread}/', 'ThreadController@update');
 Route::get('/threads/{channel}/{thread}/replies', 'ReplyController@index');
 Route::post('/threads/{channel}/{thread}/replies', 'ReplyController@store');
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionController@store')->middleware('auth');

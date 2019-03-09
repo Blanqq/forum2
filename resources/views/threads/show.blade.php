@@ -9,31 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <div  class="panel panel-default">
-
-                    <div class="panel-heading">
-                        <div class="level">
-                            <span class="flex">
-                                    <img src="{{ $thread->author->avatar_path }}" alt="" width="30" height="30">
-                                Written by <a href="/profiles/{{$thread->author->name}}">{{$thread->author->name}}</a> {{$thread->created_at}}
-                                <h1>{{ $thread->title }}</h1>
-                            </span>
-                            @can ('update', $thread)
-                                <form action="{{$thread->path()}}" method="POST">
-                                    {{csrf_field()}}
-                                    {{method_field('DELETE')}}
-                                    <button type="submit" class="btn btn-default">Delete</button>
-                                </form>
-                            @endcan
-
-                        </div>
-                    </div>
-
-                    <div class="panel-body">
-                        {{ $thread->body }}
-                        <hr>
-                    </div>
-                </div>
+                @include('threads._thread-panel')
 
                 <replies @added="repliesCount++" @removed="repliesCount--"></replies>
 
@@ -53,7 +29,6 @@
                     <div class="panel-body">
                         <p>Thread was created at {{$thread->created_at->diffForHumans()}} by <a href="#">{{$thread->author->name}}</a>
                         and have <span v-text="repliesCount"></span> {{str_plural('reply', $thread->replies_count)}}</p>
-
                     </div>
                     @if(auth()->check())
                     <div class="panel-footer">
