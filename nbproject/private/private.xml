@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Code/Homestead/forum2/resources/views/threads/create.blade.php</file>
-            <file>file:/C:/Code/Homestead/forum2/routes/web.php</file>
-            <file>file:/C:/Code/Homestead/forum2/tests/Feature/ThreadsTest.php</file>
-            <file>file:/C:/Code/Homestead/forum2/app/Thread.php</file>
+            <file>file:/C:/Code/Homestead/forum2/resources/assets/js/components/AvatarUpload.vue</file>
         </group>
     </open-files>
 </project-private>
