@@ -22,6 +22,7 @@ Vue.component('thread-view', require('./pages/Thread.vue'));
 Vue.component('paginator', require('./components/Paginator.vue'));
 Vue.component('user-notification', require('./components/UserNotification.vue'));
 Vue.component('avatar-form', require('./components/AvatarForm.vue'));
+Vue.component('search', require('./components/Search.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -18,6 +18,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::view('scan', 'scan');
+
 //Route::get('/login', )
 Route::get('/home', 'HomeController@index');
 Route::get('/threads', 'ThreadController@index')->name('threads');
