@@ -24,6 +24,7 @@ Route::get('/threads', 'ThreadController@index')->name('threads');
 Route::post('/threads', 'ThreadController@store')->middleware('must-be-confirmed');
 
 Route::get('/threads/create', 'ThreadController@create');
+Route::get('/threads/search/', 'SearchController@show');
 Route::get('/threads/{channel}','ThreadController@index');
 
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store');
