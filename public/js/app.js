@@ -89561,9 +89561,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['dataAppId', 'dataAlgoliaKey'],
     data: function data() {
         return {
-            searchClient: __WEBPACK_IMPORTED_MODULE_0_algoliasearch_lite___default()('U0JENLY1JI', '161c047b903d72bd7aa7142a02344157')
+            searchClient: __WEBPACK_IMPORTED_MODULE_0_algoliasearch_lite___default()(this.dataAppId, //'U0JENLY1JI',
+            this.dataAlgoliaKey //'161c047b903d72bd7aa7142a02344157'
+            )
         };
     }
 });

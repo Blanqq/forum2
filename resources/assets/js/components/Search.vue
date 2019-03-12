@@ -14,11 +14,12 @@
     import 'instantsearch.css/themes/algolia-min.css';
 
     export default {
+        props: ['dataAppId', 'dataAlgoliaKey'],
         data() {
             return {
                 searchClient: algoliasearch(
-                    'U0JENLY1JI',
-                    '161c047b903d72bd7aa7142a02344157'
+                    this.dataAppId,
+                    this.dataAlgoliaKey
                 ),
             };
         },
