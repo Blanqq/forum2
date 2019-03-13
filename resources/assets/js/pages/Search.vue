@@ -1,13 +1,4 @@
-<template>
-    <ais-instant-search :search-client="searchClient" index-name="threads">
-        <ais-search-box />
-        <ais-hits>
-            <div slot="item" slot-scope="{ item }">
-                <h2>{{ item.title }}</h2>
-            </div>
-        </ais-hits>
-    </ais-instant-search>
-</template>
+
 
 <script>
     import algoliasearch from 'algoliasearch/lite';
