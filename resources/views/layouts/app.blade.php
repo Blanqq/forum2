@@ -33,7 +33,7 @@
     @yield('header')
 
 </head>
-<body>
+<body style="padding: 0">
     <div id="app">
         @include('layouts.nav')
 
