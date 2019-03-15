@@ -20,7 +20,9 @@
         </div>
     </div>
     <div class="panel-body">
-        <textarea class="form-control" v-model="body"></textarea>
+        <wysiwyg v-model="body" :value="body" name="body"></wysiwyg>
+        {{--<textarea class="form-control" v-model="body"></textarea>--}}
+
         <button class="btn btn-primary" @click.prevent="update">Update</button>
         <button class="btn btn-default" @click="cancel">Cancel</button>
         <hr>
@@ -51,7 +53,7 @@
 
         </div>
     </div>
-    <div class="panel-body" v-text="body">
+    <div class="panel-body" v-html="body">
         <hr>
     </div>
     @can('update', $thread)

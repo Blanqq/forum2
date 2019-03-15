@@ -21,7 +21,8 @@
                         </div>
                         <div class="form-group">
                             <label for="body">Body:</label>
-                            <textarea name="body" class="form-control" id="body" value="{{old('body')}}" required></textarea>
+                            <wysiwyg name="body"></wysiwyg>
+                           {{-- <textarea name="body" class="form-control" id="body" value="{{old('body')}}" required></textarea>--}}
                         </div>
                         <div class="form-group">
                             <label for="body">Channel:</label>

@@ -23,6 +23,7 @@ Vue.component('paginator', require('./components/Paginator.vue'));
 Vue.component('user-notification', require('./components/UserNotification.vue'));
 Vue.component('avatar-form', require('./components/AvatarForm.vue'));
 Vue.component('search-view', require('./pages/Search.vue'));
+Vue.component('wysiwyg', require('./components/Wysiwyg.vue'));
 
 const app = new Vue({
     el: '#app'
