@@ -111,4 +111,10 @@ class ThreadTest extends TestCase
         $this->assertTrue($thread->locked);
     }
 
+    public function  test_a_thread_body_is_sanitized_automatically()
+    {
+        $thread = make('App\Thread', ['body' => '<script>alert("something malicious")</script><p>This can pass</p>']);
+        $this->assertEquals('<p>This can pass</p>', $thread->body);
+    }
+
 }
